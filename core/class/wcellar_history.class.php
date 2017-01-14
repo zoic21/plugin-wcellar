@@ -28,7 +28,41 @@ class wcellar_history {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function all() {
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+                FROM wcellar_history';
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function byId($_id) {
+		$values = array(
+			'id' => $_id,
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_history
+		WHERE id=:id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function byCellarId($_cellar_id) {
+		$values = array(
+			'cellar_id' => $_cellar_id,
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_cellar
+		WHERE cellar_id=:cellar_id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
+
+	public function save() {
+		DB::save($this);
+	}
+
+	public function remove() {
+		DB::remove($this);
+	}
 
 	/*     * **********************Getteur Setteur*************************** */
 

@@ -32,7 +32,41 @@ class wcellar_cellar {
 
 	/*     * ***********************Methode static*************************** */
 
+	public static function all() {
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+                FROM wcellar_cellar';
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function byId($_id) {
+		$values = array(
+			'id' => $_id,
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_cellar
+		WHERE id=:id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function byWineId($_wine_id) {
+		$values = array(
+			'wine_id' => $_wine_id,
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_cellar
+		WHERE wine_id=:wine_id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
+
+	public function save() {
+		DB::save($this);
+	}
+
+	public function remove() {
+		DB::remove($this);
+	}
 
 	/*     * **********************Getteur Setteur*************************** */
 	public function getId() {
