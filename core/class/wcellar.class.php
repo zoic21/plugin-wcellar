@@ -42,5 +42,3 @@ class wcellarCmd extends cmd {
 
 	/*     * **********************Getteur Setteur*************************** */
 }
-
-?>
