@@ -9,10 +9,10 @@ if (!isConnect()) {
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Region}}</li>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
-				<li class="cursor li_region active"><a data-region="all">{{Toutes}}</a></li>
+				<li class="cursor li_region active" data-region="all"><a>{{Toutes}}</a></li>
 				<?php
 foreach (wcellar_wine::listRegion() as $region) {
-	echo '<li class="cursor li_region"><a data-region="' . $region['region'] . '">' . $region['region'] . '</a></li>';
+	echo '<li class="cursor li_region" data-region="' . $region['region'] . '"><a>' . $region['region'] . '</a></li>';
 }
 ?>
 			</ul>
@@ -24,7 +24,7 @@ foreach (wcellar_wine::listRegion() as $region) {
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
 foreach (wcellar_wine::all() as $wine) {
-	echo '<li class="cursor li_wine"><a data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '">' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
+	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
 }
 ?>
 			</ul>

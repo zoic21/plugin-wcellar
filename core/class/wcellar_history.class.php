@@ -97,6 +97,13 @@ class wcellar_history {
 		DB::save($this);
 	}
 
+	public function preRemove() {
+		$cellar = wcellar_cellar::byId($this->getCellar_id());
+		$number = $cellar->getNumber() + $this->getNumber();
+		$cellar->setNumber($number);
+		$cellar->save();
+	}
+
 	public function remove() {
 		DB::remove($this);
 	}

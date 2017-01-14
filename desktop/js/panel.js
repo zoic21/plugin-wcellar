@@ -37,20 +37,44 @@
  	})
  });
 
+ $('.wineAction[data-action=remove]').on('click',function(){
+ 	bootbox.confirm('{{Etes-vous sûr de vouloir supprimer ce vin ? Attention cela supprimera les bouteilles associées dans votre cave}}', function (result) {
+ 		if (result) {
+ 			var id = $('.wine .wineAttr[data-l1key=id]').value();
+ 			jeedom.wcellar.wine.remove({
+ 				id: id,
+ 				error: function (error) {
+ 					$('#div_alert').showAlert({message: error.message, level: 'danger'});
+ 				},
+ 				success: function (data) {
+ 					$('.wineAttr').value('');
+ 					$('.li_wine[data-wine_id='+id+']').remove();
+ 					$('#div_wcellarDisplay .wine').hide();
+ 					$('#div_wcellarDisplay .cellar').hide();
+ 					$('#div_wcellarDisplay .history').hide();
+ 					$('#ul_cellar .li_cellar').remove();
+ 					$('#ul_history .li_history').remove();
+ 					$('#div_alert').showAlert({message: '{{Suppression réussie}}', level: 'success'});
+ 				}
+ 			});
+ 		}
+ 	});
+ });
+
  $('.li_wine').on('click',function(){
  	$('.li_wine').removeClass('active');
  	$(this).addClass('active');
- 	wine_load($(this).find('a').attr('data-wine_id'));
+ 	wine_load($(this).attr('data-wine_id'));
  });
 
  $('.li_region').on('click',function(){
  	$('.li_region').removeClass('active');
  	$(this).addClass('active');
- 	if($(this).find('a').attr('data-region') == 'all'){
+ 	if($(this).attr('data-region') == 'all'){
  		$('.li_wine').show();
  	}else{
  		$('.li_wine').hide();
- 		$('.li_wine a[data-region="'+$(this).find('a').attr('data-region')+'"]').closest('li').show();
+ 		$('.li_wine[data-region="'+$(this).attr('data-region')+'"]').show();
  	}
  });
 
@@ -93,6 +117,9 @@
  			$('#div_alert').showAlert({message: error.message, level: 'danger'});
  		},
  		success: function (data) {
+ 			load_cellarByWine(cellar.wine_id,data.id);
+ 			$('.cellarAttr').value('');
+ 			$('.cellar').setValues(data, '.cellarAttr');
  			$('#div_alert').showAlert({message: '{{Sauvegarde réussie}}', level: 'success'});
  		}
  	})
@@ -101,10 +128,33 @@
  $('#ul_cellar').on('click','.li_cellar',function(){
  	$('.li_cellar').removeClass('active');
  	$(this).addClass('active');
- 	cellar_load($(this).find('a').attr('data-cellar_id'));
+ 	cellar_load($(this).attr('data-cellar_id'));
  });
 
- function load_cellarByWine(_wine_id){
+ $('.cellarAction[data-action=remove]').on('click',function(){
+ 	bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette bouteille ? Attention cela supprimera les historique associé', function (result) {
+ 		if (result) {
+ 			var id = $('.cellar .cellarAttr[data-l1key=id]').value();
+ 			jeedom.wcellar.cellar.remove({
+ 				id: id,
+ 				error: function (error) {
+ 					$('#div_alert').showAlert({message: error.message, level: 'danger'});
+ 				},
+ 				success: function (data) {
+ 					$('.cellarAttr').value('');
+ 					$('.li_cellar[data-cellar_id='+id+']').remove();
+ 					$('#div_wcellarDisplay .cellar').hide();
+ 					$('#div_wcellarDisplay .history').hide();
+ 					$('#ul_history .li_history').remove();
+ 					$('#div_alert').showAlert({message: '{{Suppression réussie}}', level: 'success'});
+ 				}
+ 			});
+ 		}
+ 	});
+ });
+
+ function load_cellarByWine(_wine_id,_select_id){
+ 	$('#ul_history .li_history').remove();
  	jeedom.wcellar.cellar.byWineId({
  		wine_id: _wine_id,
  		error: function (error) {
@@ -114,15 +164,18 @@
  			$('#ul_cellar .li_cellar').remove();
  			var ul = '';
  			for(var i in data){
- 				ul += '<li class="cursor li_cellar"><a data-cellar_id="' +data[i].id+ '">' +data[i].year+ '</a></li>';
+ 				ul += '<li class="cursor li_cellar" data-cellar_id="' +data[i].id+ '"><a>' +data[i].year+ ' ('+data[i].number+')</a></li>';
  			}
  			$('#ul_cellar').append(ul);
+ 			if(init(_select_id) != ''){
+ 				$('.li_cellar[data-cellar_id='+_select_id+']').addClass('active');
+ 			}
  		}
  	});
  }
 
- function cellar_load(_id){
- 	load_historyByWine(_id);
+ function cellar_load(_id,_select_history){
+ 	load_historyByWine(_id,init(_select_history));
  	jeedom.wcellar.cellar.byId({
  		id: _id,
  		error: function (error) {
@@ -132,7 +185,9 @@
  			$('.cellarAttr').value('');
  			$('.cellar').setValues(data, '.cellarAttr');
  			$('#div_wcellarDisplay .cellar').show();
- 			$('#div_wcellarDisplay .history').hide();
+ 			if(init(_select_history) == ''){
+ 				$('#div_wcellarDisplay .history').hide();
+ 			}
  		}
  	});
  }
@@ -158,6 +213,10 @@
  			$('#div_alert').showAlert({message: error.message, level: 'danger'});
  		},
  		success: function (data) {
+ 			load_cellarByWine($('.wine .wineAttr[data-l1key=id]').value(),history.cellar_id);
+ 			cellar_load(history.cellar_id,data.id);
+ 			$('.historyAttr').value('');
+ 			$('.history').setValues(data, '.historyAttr');
  			$('#div_alert').showAlert({message: '{{Sauvegarde réussie}}', level: 'success'});
  		}
  	})
@@ -166,10 +225,32 @@
  $('#ul_history').on('click','.li_history',function(){
  	$('.li_history').removeClass('active');
  	$(this).addClass('active');
- 	history_load($(this).find('a').attr('data-history_id'));
+ 	history_load($(this).attr('data-history_id'));
  });
 
- function load_historyByWine(_cellar_id){
+ $('.historyAction[data-action=remove]').on('click',function(){
+ 	bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette bouteille ? Attention cela supprimera les historique associé', function (result) {
+ 		if (result) {
+ 			var id = $('.history .historyAttr[data-l1key=id]').value();
+ 			jeedom.wcellar.history.remove({
+ 				id: id,
+ 				error: function (error) {
+ 					$('#div_alert').showAlert({message: error.message, level: 'danger'});
+ 				},
+ 				success: function (data) {
+ 					$('.historyAttr').value('');
+ 					$('.li_history[data-history_id='+id+']').remove();
+ 					$('#div_wcellarDisplay .history').hide();
+ 					load_cellarByWine($('.wine .wineAttr[data-l1key=id]').value(),$('.li_cellar.active').attr('data-cellar_id'));
+ 					cellar_load($('.li_cellar.active').attr('data-cellar_id'));
+ 					$('#div_alert').showAlert({message: '{{Suppression réussie}}', level: 'success'});
+ 				}
+ 			});
+ 		}
+ 	});
+ });
+
+ function load_historyByWine(_cellar_id,_select_id){
  	jeedom.wcellar.history.byCellarId({
  		cellar_id: _cellar_id,
  		error: function (error) {
@@ -179,9 +260,12 @@
  			$('#ul_history .li_history').remove();
  			var ul = '';
  			for(var i in data){
- 				ul += '<li class="cursor li_history"><a data-history_id="' +data[i].id+ '">' +data[i].date+ '</a></li>';
+ 				ul += '<li class="cursor li_history" data-history_id="' +data[i].id+ '"><a>' +data[i].date+ '</a></li>';
  			}
  			$('#ul_history').append(ul);
+ 			if(init(_select_id) != ''){
+ 				$('.li_history[data-history_id='+_select_id+']').addClass('active');
+ 			}
  		}
  	});
  }

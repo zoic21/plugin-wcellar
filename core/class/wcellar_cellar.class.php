@@ -58,11 +58,11 @@ class wcellar_cellar {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
-	public static function removeByWine() {
+	public static function removeByWine($_wine_id) {
 		$values = array(
 			'wine_id' => $_wine_id,
 		);
-		$sql = 'DELETE wcellar_cellar
+		$sql = 'DELETE FROM wcellar_cellar
 		WHERE wine_id=:wine_id';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
 	}
