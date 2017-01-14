@@ -19,7 +19,7 @@ class wcellar_wine {
 	/*     * *************************Attributs****************************** */
 
 	private $id;
-	private $country;
+	private $country = 'France';
 	private $region;
 	private $name;
 	private $producer;
