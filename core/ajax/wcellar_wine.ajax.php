@@ -24,6 +24,42 @@ try {
 		throw new Exception(__('401 - Accès non autorisé', __FILE__));
 	}
 
+	ajax::init();
+
+	if (init('action') == 'all') {
+		ajax::success(utils::o2a(wcellar_wine::all()));
+	}
+
+	if (init('action') == 'byId') {
+		$wine = wcellar_wine::byId(init('id'));
+		if (!is_object($wine)) {
+			throw new Exception(__('Objet inconnu verifié l\'id : ', __FILE__) . init('id'));
+		}
+		ajax::success(utils::o2a($wine));
+	}
+
+	if (init('action') == 'remove') {
+		$wine = wcellar_wine::byId(init('id'));
+		if (!is_object($wine)) {
+			throw new Exception(__('Objet inconnu verifié l\'id', __FILE__));
+		}
+		$wine->remove();
+		ajax::success();
+	}
+
+	if (init('action') == 'save') {
+		$dataSave = json_decode(init('wine'), true);
+		if (isset($dataSave['id'])) {
+			$wine = wcellar_wine::byId($dataSave['id']);
+		}
+		if (!isset($wine) || !is_object($wine)) {
+			$wine = new wcellar_wine();
+		}
+		utils::a2o($wine, $dataSave);
+		$wine->save();
+		ajax::success(utils::o2a($wine));
+	}
+
 	throw new Exception(__('Aucune méthode correspondante à : ', __FILE__) . init('action'));
 	/*     * *********Catch exeption*************** */
 } catch (Exception $e) {

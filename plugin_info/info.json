@@ -6,5 +6,6 @@
 	"author" : "Loïc",
 	"require" : "3.0",
 	"category" : "organization",
-	"display" : "panel"
+	"display" : "panel",
+	"include" : {"type" : "php" , "file" : "wcellar.inc" }
 }
