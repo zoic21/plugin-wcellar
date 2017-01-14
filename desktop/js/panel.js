@@ -43,6 +43,17 @@
  	wine_load($(this).find('a').attr('data-wine_id'));
  });
 
+ $('.li_region').on('click',function(){
+ 	$('.li_region').removeClass('active');
+ 	$(this).addClass('active');
+ 	if($(this).find('a').attr('data-region') == 'all'){
+ 		$('.li_wine').show();
+ 	}else{
+ 		$('.li_wine').hide();
+ 		$('.li_wine a[data-region="'+$(this).find('a').attr('data-region')+'"]').closest('li').show();
+ 	}
+ });
+
 
  function wine_load(_id){
  	load_cellarByWine(_id);
