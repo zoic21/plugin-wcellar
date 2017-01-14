@@ -49,12 +49,49 @@ class wcellar_history {
 			'cellar_id' => $_cellar_id,
 		);
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-		FROM wcellar_cellar
+		FROM wcellar_history
 		WHERE cellar_id=:cellar_id';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
+	public static function removeByCellarId($_cellar_id) {
+		$values = array(
+			'cellar_id' => $_cellar_id,
+		);
+		$sql = 'DELETE FROM wcellar_history
+		WHERE cellar_id=:cellar_id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
+
+	public function preSave() {
+		if ($this->getCellar_id() == '' || !is_numeric($this->getCellar_id())) {
+			throw new Exception('Vous devez une bouteille de votre cave');
+		}
+		$cellar = wcellar_cellar::byId($this->getCellar_id());
+		if (!is_object($cellar)) {
+			throw new Exception('Vous devez une bouteille de votre cave');
+		}
+		if ($this->getDate() == '') {
+			throw new Exception('Vous devez donner une date');
+		}
+
+		$current = self::byId($this->getId());
+		$previousNumber = 0;
+		if (is_object($current)) {
+			$previousNumber = $current->getNumber();
+		}
+		$cellar = wcellar_cellar::byId($this->getCellar_id());
+		if ($cellar->getNumber() >= 0) {
+			$number = $cellar->getNumber() - $this->getNumber() + $previousNumber;
+			if ($number < 0) {
+				$number = 0;
+			}
+			$cellar->setNumber($number);
+			$cellar->save();
+		}
+	}
 
 	public function save() {
 		DB::save($this);

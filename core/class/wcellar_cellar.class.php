@@ -58,10 +58,36 @@ class wcellar_cellar {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
+	public static function removeByWine() {
+		$values = array(
+			'wine_id' => $_wine_id,
+		);
+		$sql = 'DELETE wcellar_cellar
+		WHERE wine_id=:wine_id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
+
+	public function preSave() {
+		if ($this->getWine_id() == '' || !is_numeric($this->getWine_id())) {
+			throw new Exception('Vous devez d\'abord choisir un vin avant de l\'ajouter à votre cave');
+		}
+		$wine = wcellar_wine::byId($this->getWine_id());
+		if (!is_object($wine)) {
+			throw new Exception('Vous devez d\'abord choisir un vin avant de l\'ajouter à votre cave');
+		}
+		if ($this->getYear() == '' || !is_numeric($this->getYear())) {
+			throw new Exception('Vous ne pouvez pas ajouter un vin sans année');
+		}
+	}
 
 	public function save() {
 		DB::save($this);
+	}
+
+	public function preRemove() {
+		wcellar_history::removeByCellar($this->getId());
 	}
 
 	public function remove() {

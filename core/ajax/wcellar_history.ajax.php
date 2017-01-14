@@ -27,11 +27,11 @@ try {
 	ajax::init();
 
 	if (init('action') == 'all') {
-		ajax::success(utils::o2a(whistory_history::all()));
+		ajax::success(utils::o2a(wcellar_history::all()));
 	}
 
 	if (init('action') == 'byId') {
-		$history = whistory_history::byId(init('id'));
+		$history = wcellar_history::byId(init('id'));
 		if (!is_object($history)) {
 			throw new Exception(__('Objet inconnu verifié l\'id : ', __FILE__) . init('id'));
 		}
@@ -39,11 +39,11 @@ try {
 	}
 
 	if (init('action') == 'byCellarId') {
-		ajax::success(utils::o2a(whistory_history::byCellarId(init('id'))));
+		ajax::success(utils::o2a(wcellar_history::byCellarId(init('cellar_id'))));
 	}
 
 	if (init('action') == 'remove') {
-		$history = whistory_history::byId(init('id'));
+		$history = wcellar_history::byId(init('id'));
 		if (!is_object($history)) {
 			throw new Exception(__('Objet inconnu verifié l\'id', __FILE__));
 		}
@@ -54,10 +54,10 @@ try {
 	if (init('action') == 'save') {
 		$dataSave = json_decode(init('history'), true);
 		if (isset($dataSave['id'])) {
-			$history = whistory_history::byId($dataSave['id']);
+			$history = wcellar_history::byId($dataSave['id']);
 		}
 		if (!isset($history) || !is_object($history)) {
-			$history = new whistory_history();
+			$history = new wcellar_history();
 		}
 		utils::a2o($history, $dataSave);
 		$history->save();

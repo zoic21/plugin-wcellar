@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `wcellar_cellar` (
 CREATE TABLE IF NOT EXISTS `wcellar_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cellar_id` int(11) DEFAULT NULL,
-  `date` datetime DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `number` int(11) DEFAULT NULL,
   `note` int(11) DEFAULT NULL,
   `comment` TEXT DEFAULT NULL,

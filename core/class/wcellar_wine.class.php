@@ -50,13 +50,17 @@ class wcellar_wine {
 	public static function listRegion() {
 		$sql = 'SELECT distinct(region)
 		FROM wcellar_wine';
-		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL);
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL);
 	}
 
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function save() {
 		DB::save($this);
+	}
+
+	public function preRemove() {
+		wcellar_cellar::removeByWine($this->getId());
 	}
 
 	public function remove() {

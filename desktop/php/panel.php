@@ -24,7 +24,7 @@ foreach (wcellar_wine::listRegion() as $region) {
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
 foreach (wcellar_wine::all() as $wine) {
-	echo '<li class="cursor"><a data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '">' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
+	echo '<li class="cursor li_wine"><a data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '">' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
 }
 ?>
 			</ul>
@@ -36,6 +36,7 @@ foreach (wcellar_wine::all() as $wine) {
 				<li class="nav-header">{{Ma cave}}</li>
 				<a class="btn btn-default cellarAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
+
 			</ul>
 		</div>
 		<div class="bs-sidebar">
@@ -47,8 +48,8 @@ foreach (wcellar_wine::all() as $wine) {
 		</div>
 	</div>
 
-	<div class="col-lg-8 col-md-6 col-sm-4" style="border-left: solid 1px #EEE; padding-left: 25px;">
-		<div class="wine">
+	<div class="col-lg-8 col-md-6 col-sm-4" style="border-left: solid 1px #EEE; padding-left: 25px;" id="div_wcellarDisplay">
+		<div class="wine" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
 					<legend>{{Vin}}
@@ -79,7 +80,12 @@ foreach (wcellar_wine::all() as $wine) {
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Couleur}}</label>
 								<div class="col-sm-8">
-									<input type="text" class="wineAttr form-control" data-l1key="color" />
+									<select class="wineAttr form-control" data-l1key="color" >
+											<option value="red">{{Rouge}}</option>
+											<option value="white">{{Blanc}}</option>
+											<option value="pink">{{Rosé}}</option>
+											<option value="champagne">{{Champagne}}</option>
+									</select>
 								</div>
 							</div>
 							<div class="form-group">
@@ -114,7 +120,7 @@ foreach (wcellar_wine::all() as $wine) {
 			</form>
 		</div>
 
-		<div class="cellar">
+		<div class="cellar" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
 					<legend>{{Cave}}
@@ -127,13 +133,13 @@ foreach (wcellar_wine::all() as $wine) {
 								<label class="col-sm-4 control-label">{{Année}}</label>
 								<div class="col-sm-8">
 									<input type="text" class="cellarAttr form-control" data-l1key="id" style="display : none;" />
-									<input type="numeric" class="cellarAttr form-control" data-l1key="year" />
+									<input type="number" class="cellarAttr form-control" data-l1key="year" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Prix}}</label>
 								<div class="col-sm-8">
-									<input type="numeric" class="cellarAttr form-control" data-l1key="cost" />
+									<input type="number" class="cellarAttr form-control" data-l1key="cost" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -142,16 +148,16 @@ foreach (wcellar_wine::all() as $wine) {
 									<input type="text" class="cellarAttr form-control" data-l1key="position" data-l2key="rack" placeholder="{{Casier}}" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" class="cellarAttr form-control" data-l1key="position" data-l2key="x" placeholder="{{X}}" />
+									<input type="number" class="cellarAttr form-control" data-l1key="position" data-l2key="x" placeholder="{{X}}" />
 								</div>
 								<div class="col-sm-2">
-									<input type="text" class="cellarAttr form-control" data-l1key="position" data-l2key="y" placeholder="{{Y}}" />
+									<input type="number" class="cellarAttr form-control" data-l1key="position" data-l2key="y" placeholder="{{Y}}" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Quantité}}</label>
 								<div class="col-sm-8">
-									<input type="numeric" class="cellarAttr form-control" data-l1key="number" />
+									<input type="number" class="cellarAttr form-control" data-l1key="number" />
 								</div>
 							</div>
 						</div>
@@ -181,7 +187,7 @@ foreach (wcellar_wine::all() as $wine) {
 		</div>
 
 
-		<div class="history">
+		<div class="history" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
 					<legend>{{Historique}}
@@ -194,19 +200,19 @@ foreach (wcellar_wine::all() as $wine) {
 								<label class="col-sm-4 control-label">{{Date}}</label>
 								<div class="col-sm-8">
 									<input type="text" class="historyAttr form-control" data-l1key="id" style="display : none;" />
-									<input type="text" class="historyAttr form-control" data-l1key="date" />
+									<input type="date" class="historyAttr form-control" data-l1key="date" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Quantité}}</label>
 								<div class="col-sm-8">
-									<input type="numeric" class="historyAttr form-control" data-l1key="number" />
+									<input type="number" class="historyAttr form-control" data-l1key="number" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Note}}</label>
 								<div class="col-sm-8">
-									<input type="numeric" class="historyAttr form-control" data-l1key="note" />
+									<input type="number" class="historyAttr form-control" data-l1key="note" />
 								</div>
 							</div>
 						</div>
@@ -225,5 +231,5 @@ foreach (wcellar_wine::all() as $wine) {
 
 	</div>
 </div>
-
+<?php include_file('core', 'wcellar', 'class.js', 'wcellar');?>
 <?php include_file('desktop', 'panel', 'js', 'wcellar');?>

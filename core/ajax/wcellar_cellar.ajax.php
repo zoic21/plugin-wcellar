@@ -39,7 +39,7 @@ try {
 	}
 
 	if (init('action') == 'byWineId') {
-		ajax::success(utils::o2a(wcellar_cellar::byWineId(init('id'))));
+		ajax::success(utils::o2a(wcellar_cellar::byWineId(init('wine_id'))));
 	}
 
 	if (init('action') == 'remove') {
