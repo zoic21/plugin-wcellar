@@ -18,6 +18,13 @@
 class wcellar_wine {
 	/*     * *************************Attributs****************************** */
 
+	public static $_colors = array(
+		'red' => 'Rouge',
+		'white' => 'Blanc',
+		'pink' => 'Rosé',
+		'champagne' => 'Champage',
+	);
+
 	private $id;
 	private $country = 'France';
 	private $region;

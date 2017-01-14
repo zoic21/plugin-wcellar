@@ -67,6 +67,46 @@ class wcellar_cellar {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
 	}
 
+	public static function listYear() {
+		$sql = 'SELECT distinct(year)
+		FROM wcellar_cellar';
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL);
+	}
+
+	public static function statistics($_on = 'number', $_filter = array()) {
+		$values = array();
+		$sql = 'SELECT ';
+		if ($_on == 'number') {
+			$sql .= 'SUM(`number`) as result ';
+		}
+		if ($_on == 'cost') {
+			$sql .= 'SUM(`cost`*`number`) as result ';
+		}
+		$sql .= 'FROM wcellar_cellar ';
+		if (isset($_filter['wine'])) {
+			$sql .= 'LEFT JOIN wcellar_wine ON wcellar_wine.id=wine_id ';
+		}
+		$sql .= 'WHERE ';
+		if (isset($_filter['wine'])) {
+			foreach ($_filter['wine'] as $key => $value) {
+				$values['wine_' . $key] = $value;
+				$sql .= 'wcellar_wine.' . $key . '=:wine_' . $key . ' AND ';
+			}
+		}
+		if (isset($_filter['cellar'])) {
+			foreach ($_filter['cellar'] as $key => $value) {
+				$values['cellar_' . $key] = $value;
+				$sql .= 'wcellar_cellar.' . $key . '=:cellar_' . $key . ' AND ';
+			}
+		}
+		$sql .= '1=1';
+		$return = DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
+		if (!isset($return['result'])) {
+			return '-';
+		}
+		return $return['result'];
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preSave() {
@@ -92,6 +132,10 @@ class wcellar_cellar {
 
 	public function remove() {
 		DB::remove($this);
+	}
+
+	public function getWine() {
+		return wcellar_wine::byId($this->getWine_id());
 	}
 
 	/*     * **********************Getteur Setteur*************************** */

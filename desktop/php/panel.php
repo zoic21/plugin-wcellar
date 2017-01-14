@@ -5,7 +5,8 @@ if (!isConnect()) {
 ?>
 <div class="row row-overflow">
 	<div class="col-lg-2 col-md-3 col-sm-4">
-		<div class="bs-sidebar">
+	    <a class="btn btn-default btn-xs" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
+		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Region}}</li>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
@@ -30,7 +31,7 @@ foreach (wcellar_wine::all() as $wine) {
 			</ul>
 		</div>
 	</div>
-	<div class="col-lg-2 col-md-3 col-sm-4">
+	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 26px;">
 		<div class="bs-sidebar">
 			<ul id="ul_cellar" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Ma cave}}</li>
@@ -80,11 +81,12 @@ foreach (wcellar_wine::all() as $wine) {
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Couleur}}</label>
 								<div class="col-sm-8">
-									<select class="wineAttr form-control" data-l1key="color" >
-											<option value="red">{{Rouge}}</option>
-											<option value="white">{{Blanc}}</option>
-											<option value="pink">{{Rosé}}</option>
-											<option value="champagne">{{Champagne}}</option>
+									<select class="wineAttr form-control" data-l1key="color">
+									<?php
+foreach (wcellar_wine::$_colors as $key => $value) {
+	echo '<option value="' . $key . '">' . $value . '</option>';
+}
+?>
 									</select>
 								</div>
 							</div>

@@ -63,6 +63,78 @@ class wcellar_history {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
 	}
 
+	public static function statistics($_on = 'number', $_filter = array()) {
+		$values = array();
+		$sql = 'SELECT ';
+		if ($_on == 'number') {
+			$sql .= 'SUM(wcellar_history.number) as result ';
+		}
+		if ($_on == 'cost') {
+			$sql .= 'SUM(wcellar_cellar.cost*wcellar_history.number) as result ';
+		}
+		if ($_on == 'note') {
+			$sql .= 'AVG(wcellar_history.note) as result ';
+		}
+		$sql .= 'FROM wcellar_history ';
+		if (isset($_filter['wine'])) {
+			$sql .= 'LEFT JOIN wcellar_cellar ON wcellar_cellar.id=cellar_id ';
+			$sql .= 'LEFT JOIN wcellar_wine ON wcellar_wine.id=wcellar_cellar.wine_id ';
+		} else if (isset($_filter['cellar'])) {
+			$sql .= 'LEFT JOIN wcellar_cellar ON wcellar_cellar.id=cellar_id ';
+		} else if ($_on == 'cost') {
+			$sql .= 'LEFT JOIN wcellar_cellar ON wcellar_cellar.id=cellar_id ';
+		}
+		$sql .= 'WHERE ';
+		if (isset($_filter['wine'])) {
+			foreach ($_filter['wine'] as $key => $value) {
+				$values['wine_' . $key] = $value;
+				$sql .= 'wcellar_wine.' . $key . '=:wine_' . $key . ' AND ';
+			}
+		}
+		if (isset($_filter['cellar'])) {
+			foreach ($_filter['cellar'] as $key => $value) {
+				$values['cellar_' . $key] = $value;
+				$sql .= 'wcellar_cellar.' . $key . '=:cellar_' . $key . ' AND ';
+			}
+		}
+		if (isset($_filter['history'])) {
+			foreach ($_filter['history'] as $key => $value) {
+				$values['history_' . $key] = $value;
+				$sql .= 'wcellar_history.' . $key . '=:history_' . $key . ' AND ';
+			}
+		}
+		if ($_on == 'note') {
+			$sql .= ' note IS NOT NULL AND ';
+		}
+		$sql .= '1=1';
+		$return = DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
+		if (!isset($return['result'])) {
+			return '-';
+		}
+		if ($_on == 'note') {
+			return round($return['result'], 1);
+		}
+		return $return['result'];
+	}
+
+	public static function most($_on) {
+		if ($_on == 'note') {
+			$sql = 'SELECT cellar_id, SUM(note)/COUNT(*) AS moy
+					FROM wcellar_history
+					GROUP BY cellar_id
+					ORDER BY moy DESC
+					LIMIT 10';
+		} else if ($_on == 'cost') {
+			$sql = 'SELECT cellar_id, SUM(wcellar_cellar.cost)*COUNT(*) AS moy
+					FROM wcellar_history
+					LEFT JOIN wcellar_cellar ON wcellar_cellar.id=cellar_id
+					GROUP BY cellar_id
+					ORDER BY moy DESC
+					LIMIT 10';
+		}
+		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preSave() {

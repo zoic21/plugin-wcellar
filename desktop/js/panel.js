@@ -14,6 +14,11 @@
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
 
+ $('#bt_statistics').on('click',function(){
+ 	$('#md_modal').dialog({title: "{{Statistique de la cave}}"});
+ 	$("#md_modal").load('index.php?v=d&modal=statistics&plugin=wcellar').dialog('open');
+ });
+
 
  /*********************************WINE**********************************************/
 
