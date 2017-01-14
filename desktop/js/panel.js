@@ -19,6 +19,15 @@
  	$("#md_modal").load('index.php?v=d&modal=statistics&plugin=wcellar').dialog('open');
  });
 
+ $('#bt_search').on('click',function(){
+ 	window.location.href='index.php?v=d&m=wcellar&p=panel&search='+encodeURI($('#in_search').value());
+ });
+
+ $("#in_search").on('keypress', function (e) {
+ 	if (e.which == '13') {
+ 		window.location.href='index.php?v=d&m=wcellar&p=panel&search='+encodeURI($('#in_search').value());
+ 	}
+ })
 
  /*********************************WINE**********************************************/
 

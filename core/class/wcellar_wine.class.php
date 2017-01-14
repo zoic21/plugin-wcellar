@@ -19,10 +19,10 @@ class wcellar_wine {
 	/*     * *************************Attributs****************************** */
 
 	public static $_colors = array(
-		'red' => 'Rouge',
-		'white' => 'Blanc',
-		'pink' => 'Rosé',
-		'champagne' => 'Champage',
+		'rouge' => 'Rouge',
+		'blanc' => 'Blanc',
+		'rose' => 'Rosé',
+		'champage' => 'Champage',
 	);
 
 	private $id;
@@ -42,6 +42,32 @@ class wcellar_wine {
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
                 FROM wcellar_wine';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function search($_search) {
+		$values = array(
+			'search' => '%' . $_search . '%',
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__, 'wcellar_wine') . '
+                FROM wcellar_wine
+                INNER JOIN wcellar_cellar ON wcellar_cellar.wine_id=wcellar_wine.id
+                INNER JOIN wcellar_history ON wcellar_history.cellar_id=wcellar_cellar.id
+                WHERE wcellar_wine.region LIKE :search
+                	OR wcellar_wine.country LIKE :search
+                	OR wcellar_wine.name LIKE :search
+                	OR wcellar_wine.producer LIKE :search
+                	OR wcellar_wine.color LIKE :search
+                	OR wcellar_wine.comment LIKE :search
+                	OR wcellar_wine.advise LIKE :search
+                	OR wcellar_wine.recommended_dish LIKE :search
+                	OR wcellar_cellar.year LIKE :search
+                	OR wcellar_cellar.cost LIKE :search
+                	OR wcellar_cellar.comment LIKE :search
+                	OR wcellar_cellar.advise LIKE :search
+                	OR wcellar_cellar.recommended_dish LIKE :search
+                	OR wcellar_history.comment LIKE :search
+                GROUP BY wcellar_wine.id';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
 	public static function byId($_id) {

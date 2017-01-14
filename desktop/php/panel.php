@@ -4,8 +4,8 @@ if (!isConnect()) {
 }
 ?>
 <div class="row row-overflow">
-	<div class="col-lg-2 col-md-3 col-sm-4">
-	    <a class="btn btn-default btn-xs" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
+	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 4px;">
+	    <a class="btn btn-default btn-sm" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Region}}</li>
@@ -24,15 +24,23 @@ foreach (wcellar_wine::listRegion() as $region) {
 				<a class="btn btn-default wineAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
-foreach (wcellar_wine::all() as $wine) {
-	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
+if (init('search') != '') {
+	foreach (wcellar_wine::search(init('search')) as $wine) {
+		echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
+	}
+} else {
+	foreach (wcellar_wine::all() as $wine) {
+		echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
+	}
 }
 ?>
 			</ul>
 		</div>
 	</div>
-	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 26px;">
-		<div class="bs-sidebar">
+	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 4px;">
+		<input class="form-control input-sm" id="in_search" style="display: inline-block; width:calc(100% - 57px)" value="<?php echo init('search') ?>" />
+		<a class="btn btn-default btn-sm" id="bt_search"><i class="fa fa-search"></i> {{OK}}</a>
+		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_cellar" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Ma cave}}</li>
 				<a class="btn btn-default cellarAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
