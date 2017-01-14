@@ -1,0 +1,9 @@
+{
+	"id" : "wcellar",
+	"name" : "Gestionnaire de cace",
+	"description" : "Plugin pour gerer sa cave",
+	"licence" : "AGPL",
+	"author" : "Loïc",
+	"require" : "3.0",
+	"category" : "organization"
+}
