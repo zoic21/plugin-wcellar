@@ -47,6 +47,12 @@ class wcellar_wine {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW, PDO::FETCH_CLASS, __CLASS__);
 	}
 
+	public static function listRegion() {
+		$sql = 'SELECT distinct(region)
+		FROM wcellar_wine';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function save() {
