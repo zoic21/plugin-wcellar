@@ -16,6 +16,9 @@
 
  function initWcellarPanel() {
     $('ul[data-role=nd2tabs]').tabs();
+    $('.wine .ui-shadow-inset.ui-input-has-clear:first').remove()
+    $('.cellar .ui-shadow-inset.ui-input-has-clear:first').remove()
+    $('.history .ui-shadow-inset.ui-input-has-clear:first').remove()
 
     $("#in_search").on('keypress', function (e) {
         if (e.which == '13') {
@@ -54,6 +57,7 @@
         $('#div_wcellarDisplay .cellar').hide();
         $('#div_wcellarDisplay .history').hide();
         $('li[data-tab=display]').click();
+        $('body').animate({ scrollTop: $('.wine').offset().top -120}, 500);
     });
 
     $('.wineAction[data-action=remove]').on('click',function(){
@@ -89,6 +93,7 @@
         $('#div_wcellarDisplay .cellar').show();
         $('#div_wcellarDisplay .history').hide();
         $('li[data-tab=display]').click();
+        $('body').animate({ scrollTop: $('.cellar').offset().top -120}, 500);
     });
 
     $('#ul_cellar').on('click','.li_cellar',function(){
@@ -145,6 +150,7 @@
         $('.historyAttr').value('');
         $('#div_wcellarDisplay .history').show();
         $('li[data-tab=display]').click();
+        $('body').animate({ scrollTop: $('.history').offset().top -120}, 500);
     });
 
     $('#ul_history').on('click','.li_history',function(){
