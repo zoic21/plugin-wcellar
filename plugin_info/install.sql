@@ -17,6 +17,8 @@ CREATE TABLE IF NOT EXISTS `wcellar_cellar` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `wine_id` int(11) DEFAULT NULL,
   `year` int(11) DEFAULT NULL,
+  `peak` int(11) DEFAULT NULL,
+  `deadline` int(11) DEFAULT NULL,
   `cost` float(2) DEFAULT NULL,
   `position` TEXT DEFAULT NULL,
   `number` int(11) DEFAULT NULL,

@@ -19,6 +19,12 @@
  	$("#md_modal").load('index.php?v=d&modal=statistics&plugin=wcellar').dialog('open');
  });
 
+ $('#bt_consume').on('click',function(){
+ 	$('#md_modal').dialog({title: "{{A consommer}}"});
+ 	$("#md_modal").load('index.php?v=d&modal=consume&plugin=wcellar').dialog('open');
+ });
+
+
  $('#bt_search').on('click',function(){
  	window.location.href='index.php?v=d&m=wcellar&p=panel&search='+encodeURI($('#in_search').value());
  });

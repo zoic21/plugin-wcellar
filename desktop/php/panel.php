@@ -6,6 +6,7 @@ if (!isConnect()) {
 <div class="row row-overflow">
 	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 4px;">
 	    <a class="btn btn-default btn-sm" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
+	    <a class="btn btn-default btn-sm" id="bt_consume"><i class="fa fa-calendar"></i> {{A consommer}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
 				<li class="nav-header">{{Region}}</li>
@@ -143,6 +144,15 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 								<div class="col-sm-8">
 									<input type="text" class="cellarAttr form-control" data-l1key="id" style="display : none;" />
 									<input type="number" class="cellarAttr form-control" data-l1key="year" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{A consommer}}</label>
+								<div class="col-sm-4">
+									<input type="number" class="cellarAttr form-control" data-l1key="peak" placeholder="{{Année apogée}}" />
+								</div>
+								<div class="col-sm-4">
+									<input type="number" class="cellarAttr form-control" data-l1key="deadline" placeholder="{{Année limite}}" />
 								</div>
 							</div>
 							<div class="form-group">

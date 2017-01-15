@@ -21,6 +21,8 @@ class wcellar_cellar {
 	private $id;
 	private $wine_id;
 	private $year;
+	private $peak;
+	private $deadline;
 	private $cost;
 	private $position;
 	private $number;
@@ -107,6 +109,29 @@ class wcellar_cellar {
 		return $return['result'];
 	}
 
+	public static function atPeak() {
+		$values = array(
+			'year' => date('Y'),
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_cellar
+		WHERE peak <= :year
+			AND deadline > :year
+			AND `number` > 0';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
+	public static function atDeadline() {
+		$values = array(
+			'year' => date('Y'),
+		);
+		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		FROM wcellar_cellar
+		WHERE deadline <= :year
+			AND `number` > 0';
+		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
+	}
+
 	/*     * *********************Méthodes d'instance************************* */
 
 	public function preSave() {
@@ -161,6 +186,22 @@ class wcellar_cellar {
 
 	public function setYear($year) {
 		$this->year = $year;
+	}
+
+	public function getPeak() {
+		return $this->peak;
+	}
+
+	public function setPeak($peak) {
+		$this->peak = $peak;
+	}
+
+	public function getDeadline() {
+		return $this->deadline;
+	}
+
+	public function setDeadline($deadline) {
+		$this->deadline = $deadline;
 	}
 
 	public function getCost() {

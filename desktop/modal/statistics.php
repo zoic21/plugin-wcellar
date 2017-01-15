@@ -243,7 +243,7 @@ foreach (wcellar_cellar::listYear() as $year) {
 
 	</div>
 
-	<div role="tabpanel" class="tab-pane active" id="wcellar_top">
+	<div role="tabpanel" class="tab-pane" id="wcellar_top">
 		<legend>{{Top 10/note}}</legend>
 		<table class="table table-condensed">
 			<thead>
