@@ -21,10 +21,13 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 function wcellar_install() {
 	$sql = file_get_contents(dirname(__FILE__) . '/install.sql');
 	DB::Prepare($sql, array(), DB::FETCH_TYPE_ROW);
+	config::save('displayMobilePanel', 1, 'wcellar');
+	config::save('displayDesktopPanel', 1, 'wcellar');
 }
 
 function wcellar_update() {
-
+	config::save('displayMobilePanel', 1, 'wcellar');
+	config::save('displayDesktopPanel', 1, 'wcellar');
 }
 
 function wcellar_remove() {
