@@ -40,7 +40,8 @@ class wcellar_wine {
 
 	public static function all() {
 		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
-                FROM wcellar_wine';
+                FROM wcellar_wine
+                ORDER BY name';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
