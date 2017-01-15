@@ -67,7 +67,8 @@ class wcellar_wine {
                 	OR wcellar_cellar.advise LIKE :search
                 	OR wcellar_cellar.recommended_dish LIKE :search
                 	OR wcellar_history.comment LIKE :search
-                GROUP BY wcellar_wine.id';
+                GROUP BY wcellar_wine.id
+                ORDER BY name';
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
