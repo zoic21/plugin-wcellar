@@ -25,13 +25,12 @@ foreach (wcellar_wine::listRegion() as $region) {
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
 if (init('search') != '') {
-	foreach (wcellar_wine::search(init('search')) as $wine) {
-		echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
-	}
+	$wines = wcellar_wine::search(init('search'));
 } else {
-	foreach (wcellar_wine::all() as $wine) {
-		echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getName() . ' ' . $wine->getProducer() . '</a></li>';
-	}
+	$wines = wcellar_wine::all();
+}
+foreach ($wines as $wine) {
+	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . trim($wine->getName() . ' ' . $wine->getProducer()) . ' (' . $wine->getNumberOfBottle() . ')</a></li>';
 }
 ?>
 			</ul>

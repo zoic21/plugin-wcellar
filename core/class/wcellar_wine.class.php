@@ -100,6 +100,17 @@ class wcellar_wine {
 		DB::remove($this);
 	}
 
+	public function getNumberOfBottle() {
+		$values = array(
+			'wine_id' => $this->getId(),
+		);
+		$sql = 'SELECT SUM(`number`) as result
+		FROM wcellar_cellar
+		WHERE wine_id=:wine_id';
+		$result = DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
+		return $result['result'];
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 	public function getId() {
 		return $this->id;

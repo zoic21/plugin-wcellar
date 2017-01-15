@@ -113,7 +113,7 @@
  /********************************CELLAR*********************************************/
 
  $('.cellarAction[data-action=add]').on('click',function(){
- 	if($('.wine .wineAttr[data-l1key=id]').value() == ''){
+ 	if($('.wine .wineAttr[data-l1key=id]').value() == '' || !$('#div_wcellarDisplay .wine').is(':visible')){
  		$('#div_alert').showAlert({message: '{{Vous ne pouvez ajouter une bouteille sans choisir un vin}}', level: 'danger'});
  		return;
  	}
@@ -209,7 +209,7 @@
  /*******************************History*********************************************/
 
  $('.historyAction[data-action=add]').on('click',function(){
- 	if($('.cellar .cellarAttr[data-l1key=id]').value() == ''){
+ 	if($('.cellar .cellarAttr[data-l1key=id]').value() == '' || !$('#div_wcellarDisplay .cellar').is(':visible')){
  		$('#div_alert').showAlert({message: '{{Vous ne pouvez ajouter un historique sans choisir de bouteille}}', level: 'danger'});
  		return;
  	}
