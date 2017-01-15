@@ -63,6 +63,25 @@
  	$.ajax(paramsAJAX);
  }
 
+ jeedom.wcellar.wine.all = function (_params) {
+ 	var paramsRequired = [];
+ 	var paramsSpecifics = {};
+ 	try {
+ 		jeedom.private.checkParamsRequired(_params || {}, paramsRequired);
+ 	} catch (e) {
+ 		(_params.error || paramsSpecifics.error || jeedom.private.default_params.error)(e);
+ 		return;
+ 	}
+ 	var params = $.extend({}, jeedom.private.default_params, paramsSpecifics, _params || {});
+ 	var paramsAJAX = jeedom.private.getParamsAJAX(params);
+ 	paramsAJAX.url = 'plugins/wcellar/core/ajax/wcellar_wine.ajax.php';
+ 	paramsAJAX.data = {
+ 		action: 'all',
+ 		search: _params.search || '',
+ 	};
+ 	$.ajax(paramsAJAX);
+ }
+
  jeedom.wcellar.wine.byId = function (_params) {
  	var paramsRequired = ['id'];
  	var paramsSpecifics = {};

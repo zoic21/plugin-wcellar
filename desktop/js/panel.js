@@ -243,7 +243,7 @@
  });
 
  $('.historyAction[data-action=remove]').on('click',function(){
- 	bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette bouteille ? Attention cela supprimera les historique associé', function (result) {
+ 	bootbox.confirm('{{Etes-vous sûr de vouloir supprimer cette historique ?', function (result) {
  		if (result) {
  			var id = $('.history .historyAttr[data-l1key=id]').value();
  			jeedom.wcellar.history.remove({

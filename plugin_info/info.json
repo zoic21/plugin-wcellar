@@ -7,5 +7,6 @@
 	"require" : "3.0",
 	"category" : "organization",
 	"display" : "panel",
+	"mobile" : "panel",
 	"include" : {"type" : "php" , "file" : "wcellar.inc" }
 }

@@ -113,6 +113,12 @@ class wcellar_wine {
 		return $result['result'];
 	}
 
+	public function toArray() {
+		$return = utils::o2a($this, true);
+		$return['numberOfBottle'] = $this->getNumberOfBottle();
+		return $return;
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 	public function getId() {
 		return $this->id;

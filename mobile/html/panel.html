@@ -1,0 +1,107 @@
+<div data-role="header" data-position="fixed" class="wow fadeIn" style="margin-top:66px;">
+	<ul data-role="nd2tabs" data-swipe="true">
+		<li data-tab="wine" data-tab-active="true">{{Vin}}</li>
+		<li data-tab="cellar">{{Ma cave}}</li>
+		<li data-tab="history">{{Historique}}</li>
+		<li data-tab="display">{{Détails}}</li>
+	</ul>
+</div>
+
+<div data-role="nd2tab" data-tab="wine" style="margin-top:70px;">
+	<input type="text" id="in_search" data-clear-btn="true" placeholder="{{Rechercher}}">
+	<ul data-role="listview" data-icon="false" id="ul_wine">
+		<li data-role="list-divider">{{Vins}}
+			<a href="#" class="ui-btn ui-btn-inline clr-primary wineAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
+		</li>
+	</ul>
+</div>
+
+<div data-role="nd2tab" data-tab="cellar" style="margin-top:70px;">
+	<ul data-role="listview" data-icon="false" id="ul_cellar">
+		<li data-role="list-divider">{{Ma cave}}
+			<a href="#" class="ui-btn ui-btn-inline clr-primary cellarAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
+		</li>
+	</ul>
+</div>
+
+<div data-role="nd2tab" data-tab="history" style="margin-top:70px;">
+	<ul data-role="listview" data-icon="false" id="ul_history">
+		<li data-role="list-divider">{{Historique}}
+			<a href="#" class="ui-btn ui-btn-inline clr-primary historyAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
+		</li>
+	</ul>
+</div>
+
+<div data-role="nd2tab" data-tab="display" id="div_wcellarDisplay" style="margin-top:70px;">
+	<div class="row">
+		<div class="col-xs-12 col-sm-4 wine" style="display:none;">
+			<input type="text" class="wineAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
+			<legend>{{Vin}} 
+				<a href="#" class="ui-btn ui-btn-inline clr-primary wineAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
+				<a href="#" class="ui-btn ui-btn-inline clr-warning wineAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
+			</legend>
+			<label>{{Nom}}</label>
+			<input type="text" class="wineAttr" data-l1key="name" data-clear-btn="true" />
+			<label>{{Région}}</label>
+			<input type="text" class="wineAttr" data-l1key="region" data-clear-btn="true" />
+			<label>{{Coleur}}</label>
+			<select type="text" class="wineAttr" data-l1key="color" data-native-menu="false">
+				<option value="rouge">{{Rouge}}</option>
+				<option value="blanc">{{Blanc}}</option>
+				<option value="rose">{{Rosé}}</option>
+				<option value="champagne">{{Champagne}}</option>
+			</select>
+			<label>{{Producteur}}</label>
+			<input type="text" class="wineAttr" data-l1key="producer" data-clear-btn="true" />
+			<label>{{Commentaire}}</label>
+			<textarea type="text" class="wineAttr" data-l1key="comment" rows="4"></textarea>
+			<label>{{Conseil}}</label>
+			<textarea type="text" class="wineAttr" data-l1key="advise" rows="4"></textarea>
+			<label>{{Plat recommandé}}</label>
+			<textarea type="text" class="wineAttr" data-l1key="recommended_dish" rows="4"></textarea>
+		</div>
+		<div class="col-xs-12 col-sm-4 cellar" style="display:none;">
+			<input type="text" class="cellarAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
+			<legend>{{Cave}}
+				<a href="#" class="ui-btn ui-btn-inline clr-primary cellarAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
+				<a href="#" class="ui-btn ui-btn-inline clr-warning cellarAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
+			</legend>
+			
+			<label>{{Année}}</label>
+			<input type="number" class="cellarAttr" data-l1key="year" data-clear-btn="true" data-clear-btn="true" />
+			<label>{{Prix}}</label>
+			<input type="number" class="cellarAttr" data-l1key="cost" data-clear-btn="true" />
+			<label>{{Casier}}</label>
+			<input type="text" class="cellarAttr" data-l1key="position" data-l2key="rack" data-clear-btn="true" />
+			<label>{{Position}}</label>
+			<input type="number" class="cellarAttr" data-l1key="position" data-l2key="x" data-clear-btn="true" />
+			<input type="number" class="cellarAttr" data-l1key="position" data-l2key="y" data-clear-btn="true" />
+			<label>{{Quantité}}</label>
+			<input type="number" class="cellarAttr" data-l1key="number" data-clear-btn="true" />
+			<label>{{Commentaire}}</label>
+			<textarea type="text" class="cellarAttr" data-l1key="comment" rows="4"></textarea>
+			<label>{{Conseil}}</label>
+			<textarea type="text" class="cellarAttr" data-l1key="advise" rows="4"></textarea>
+			<label>{{Plat recommandé}}</label>
+			<textarea type="text" class="cellarAttr" data-l1key="recommended_dish" rows="4"></textarea>
+		</div>
+		<div class="col-xs-12 col-sm-4 history" style="display:none;">
+			<input type="text" class="historyAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
+			<legend>{{Historique}}
+				<a href="#" class="ui-btn ui-btn-inline clr-primary historyAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
+				<a href="#" class="ui-btn ui-btn-inline clr-warning historyAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
+			</legend>
+			<label>{{Date}}</label>
+			<input type="date" class="historyAttr" data-l1key="date" data-clear-btn="true" />
+			<label>{{Quantité}}</label>
+			<input type="number" class="historyAttr" data-l1key="number" data-clear-btn="true" />
+			<label>{{Note}}</label>
+			<input type="number" class="historyAttr" data-l1key="note" data-clear-btn="true" />
+			<label>{{Commentaire}}</label>
+			<textarea type="text" class="historyAttr" data-l1key="comment" rows="4"></textarea>
+		</div>
+	</div>
+</div>
+
+<script src="core/php/getJS.php?file=plugins/wcellar/core/js/wcellar.class.js"></script>
+<script src="core/php/getJS.php?file=plugins/wcellar/mobile/js/panel.js"></script>

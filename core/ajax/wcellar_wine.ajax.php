@@ -27,6 +27,9 @@ try {
 	ajax::init();
 
 	if (init('action') == 'all') {
+		if (init('search') != '') {
+			ajax::success(utils::o2a(wcellar_wine::search(init('search'))));
+		}
 		ajax::success(utils::o2a(wcellar_wine::all()));
 	}
 

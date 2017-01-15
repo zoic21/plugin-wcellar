@@ -118,7 +118,7 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Accompagne}}</label>
+								<label class="col-sm-4 control-label">{{Plat recommandé}}</label>
 								<div class="col-sm-8">
 									<textarea class="wineAttr form-control" data-l1key="recommended_dish"></textarea>
 								</div>
