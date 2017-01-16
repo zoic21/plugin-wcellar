@@ -257,8 +257,9 @@ foreach (wcellar_cellar::listYear() as $year) {
 				<?php
 foreach (wcellar_history::most('note') as $value) {
 	$cellar = wcellar_cellar::byId($value['cellar_id']);
+	$wine = $cellar->getWine();
 	echo '<tr>';
-	echo '<td>' . $cellar->getWine()->getName() . ' ' . $cellar->getWine()->getProducer() . '</td>';
+	echo '<td>' . $cellar->getWine()->getHumanName() . '</td>';
 	echo '<td>' . $cellar->getYear() . '</td>';
 	echo '<td>' . round($value['moy'], 1) . '</td>';
 	echo '</tr>';
@@ -281,7 +282,7 @@ foreach (wcellar_history::most('note') as $value) {
 foreach (wcellar_history::most('cost') as $value) {
 	$cellar = wcellar_cellar::byId($value['cellar_id']);
 	echo '<tr>';
-	echo '<td>' . $cellar->getWine()->getName() . ' ' . $cellar->getWine()->getProducer() . '</td>';
+	echo '<td>' . $cellar->getWine()->getHumanName() . '</td>';
 	echo '<td>' . $cellar->getYear() . '</td>';
 	echo '<td>' . $value['moy'] . ' €</td>';
 	echo '</tr>';

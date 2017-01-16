@@ -119,6 +119,16 @@ class wcellar_wine {
 	public function toArray() {
 		$return = utils::o2a($this, true);
 		$return['numberOfBottle'] = $this->getNumberOfBottle();
+		$return['humanName'] = $this->getHumanName();
+		return $return;
+	}
+
+	public function getHumanName() {
+		$bottle = $this->getNumberOfBottle();
+		$return = $this->getRegion() . ' - ' . trim($this->getName() . ' ' . $this->getProducer()) . ' - ' . $this->getColor();
+		if ($bottle > 0) {
+			$return .= ' (' . $this->getNumberOfBottle() . ')';
+		}
 		return $return;
 	}
 
