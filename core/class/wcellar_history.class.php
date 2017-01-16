@@ -25,6 +25,7 @@ class wcellar_history {
 	private $note;
 	private $comment;
 	private $configuration;
+	private $name;
 
 	/*     * ***********************Methode static*************************** */
 
@@ -171,6 +172,17 @@ class wcellar_history {
 		DB::remove($this);
 	}
 
+	public function toArray() {
+		$return = utils::o2a($this, true);
+		$return['humanName'] = $this->getHumanName();
+		return $return;
+	}
+
+	public function getHumanName() {
+		$return = trim($this->getName() . ' ' . $this->getDate());
+		return $return;
+	}
+
 	/*     * **********************Getteur Setteur*************************** */
 
 	public function getId() {
@@ -187,6 +199,14 @@ class wcellar_history {
 
 	public function setCellar_id($cellar_id) {
 		$this->cellar_id = $cellar_id;
+	}
+
+	public function getName() {
+		return $this->name;
+	}
+
+	public function setName($name) {
+		$this->name = $name;
 	}
 
 	public function getDate() {

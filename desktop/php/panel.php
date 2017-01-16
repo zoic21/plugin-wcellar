@@ -221,9 +221,15 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 					<div class="row">
 						<div class="col-md-6 col-sm-12">
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Date}}</label>
+								<label class="col-sm-4 control-label">{{Nom}}</label>
 								<div class="col-sm-8">
 									<input type="text" class="historyAttr form-control" data-l1key="id" style="display : none;" />
+									<input type="text" class="historyAttr form-control" data-l1key="name" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">{{Date}}</label>
+								<div class="col-sm-8">
 									<input type="date" class="historyAttr form-control" data-l1key="date" />
 								</div>
 							</div>
