@@ -1,5 +1,5 @@
 <div data-role="header" data-position="fixed" class="wow fadeIn" style="margin-top:65px;">
-	<ul data-role="nd2tabs" data-swipe="true">
+	<ul data-role="nd2tabs" data-swipe="true" style="margin-left: -8px;">
 		<li data-tab="wine" data-tab-active="true"><i class="icon nature-leaf32"></i> {{Vin}}</li>
 		<li data-tab="cellar"><i class="icon nourriture-wine23"></i> {{Ma cave}}</li>
 		<li data-tab="history"><i class="fa fa-file"></i> {{Historique}}</li>
@@ -9,24 +9,21 @@
 
 <div data-role="nd2tab" data-tab="wine" style="margin-top:70px;">
 	<input type="text" id="in_search" data-clear-btn="true" placeholder="{{Rechercher}}">
-	<ul data-role="listview" data-icon="false" id="ul_wine">
-			<a href="#" class="ui-btn ui-btn-inline clr-primary wineAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
-		</li>
-	</ul>
+	<a href="#" class="ui-btn ui-mini ui-btn-raised clr-primary wineAction" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
+	<br/>
+	<ul data-role="listview" data-icon="false" id="ul_wine"></ul>
 </div>
 
 <div data-role="nd2tab" data-tab="cellar" style="margin-top:70px;">
-	<ul data-role="listview" data-icon="false" id="ul_cellar">
-			<a href="#" class="ui-btn ui-btn-inline clr-primary cellarAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
-		</li>
-	</ul>
+	<a href="#" class="ui-btn ui-mini ui-btn-raised clr-primary cellarAction" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
+	<br/>
+	<ul data-role="listview" data-icon="false" id="ul_cellar"></ul>
 </div>
 
 <div data-role="nd2tab" data-tab="history" style="margin-top:70px;">
-	<ul data-role="listview" data-icon="false" id="ul_history">
-			<a href="#" class="ui-btn ui-btn-inline clr-primary historyAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
-		</li>
-	</ul>
+	<a href="#" class="ui-btn ui-mini ui-btn-raised clr-primary historyAction" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
+	<br/>
+	<ul data-role="listview" data-icon="false" id="ul_history"></ul>
 </div>
 
 <div data-role="nd2tab" data-tab="display" id="div_wcellarDisplay" style="margin-top:70px;">

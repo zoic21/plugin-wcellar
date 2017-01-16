@@ -39,9 +39,10 @@ class wcellar_wine {
 	/*     * ***********************Methode static*************************** */
 
 	public static function all() {
-		$sql = 'SELECT ' . DB::buildField(__CLASS__) . '
+		$sql = 'SELECT ' . DB::buildField(__CLASS__, 'wcellar_wine') . '
                 FROM wcellar_wine
-                ORDER BY name';
+                LEFT JOIN wcellar_cellar ON wcellar_cellar.wine_id=wcellar_wine.id
+                ORDER BY wcellar_cellar.number DESC,wcellar_wine.region,wcellar_wine.name';
 		return DB::Prepare($sql, array(), DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 

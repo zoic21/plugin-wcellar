@@ -3,8 +3,14 @@ if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
 ?>
+<style type="text/css">
+	.bs-sidebar ul.bs-sidenav li a{
+		font-size: 0.85em;
+	}
+
+</style>
 <div class="row row-overflow">
-	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 4px;">
+	<div class="col-lg-3 col-md-4 col-sm-4" style="margin-top : 4px;">
 	    <a class="btn btn-default btn-sm" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
 	    <a class="btn btn-default btn-sm" id="bt_consume"><i class="fa fa-calendar"></i> {{A consommer}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
@@ -31,7 +37,7 @@ if (init('search') != '') {
 	$wines = wcellar_wine::all();
 }
 foreach ($wines as $wine) {
-	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . trim($wine->getName() . ' - ' . $wine->getProducer() . ' ' . $wine->getRegion() . ' - ' . $wine->getColor()) . ' (' . $wine->getNumberOfBottle() . ')</a></li>';
+	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getRegion() . ' - ' . trim($wine->getName() . ' ' . $wine->getProducer()) . ' - ' . $wine->getColor() . ' (' . $wine->getNumberOfBottle() . ')</a></li>';
 }
 ?>
 			</ul>
@@ -57,7 +63,7 @@ foreach ($wines as $wine) {
 		</div>
 	</div>
 
-	<div class="col-lg-8 col-md-6 col-sm-4" style="border-left: solid 1px #EEE; padding-left: 25px;" id="div_wcellarDisplay">
+	<div class="col-lg-7 col-md-5 col-sm-4" style="border-left: solid 1px #EEE; padding-left: 25px;" id="div_wcellarDisplay">
 		<div class="wine" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
