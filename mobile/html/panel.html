@@ -1,16 +1,15 @@
 <div data-role="header" data-position="fixed" class="wow fadeIn" style="margin-top:65px;">
 	<ul data-role="nd2tabs" data-swipe="true">
-		<li data-tab="wine" data-tab-active="true">{{Vin}}</li>
-		<li data-tab="cellar">{{Ma cave}}</li>
-		<li data-tab="history">{{Historique}}</li>
-		<li data-tab="display">{{Détails}}</li>
+		<li data-tab="wine" data-tab-active="true"><i class="icon nature-leaf32"></i> {{Vin}}</li>
+		<li data-tab="cellar"><i class="icon nourriture-wine23"></i> {{Ma cave}}</li>
+		<li data-tab="history"><i class="fa fa-file"></i> {{Historique}}</li>
+		<li data-tab="display"><i class="fa fa-search"></i> {{Détails}}</li>
 	</ul>
 </div>
 
 <div data-role="nd2tab" data-tab="wine" style="margin-top:70px;">
 	<input type="text" id="in_search" data-clear-btn="true" placeholder="{{Rechercher}}">
 	<ul data-role="listview" data-icon="false" id="ul_wine">
-		<li data-role="list-divider">{{Vins}}
 			<a href="#" class="ui-btn ui-btn-inline clr-primary wineAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
 		</li>
 	</ul>
@@ -18,7 +17,6 @@
 
 <div data-role="nd2tab" data-tab="cellar" style="margin-top:70px;">
 	<ul data-role="listview" data-icon="false" id="ul_cellar">
-		<li data-role="list-divider">{{Ma cave}}
 			<a href="#" class="ui-btn ui-btn-inline clr-primary cellarAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
 		</li>
 	</ul>
@@ -26,7 +24,6 @@
 
 <div data-role="nd2tab" data-tab="history" style="margin-top:70px;">
 	<ul data-role="listview" data-icon="false" id="ul_history">
-		<li data-role="list-divider">{{Historique}}
 			<a href="#" class="ui-btn ui-btn-inline clr-primary historyAction pull-right" data-action="add"><i class="fa fa-plus-circle"></i></a>
 		</li>
 	</ul>
@@ -36,7 +33,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-4 wine" style="display:none;">
 			<input type="text" class="wineAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
-			<legend style="font-size: 1.8em;">{{Vin}} 
+			<legend style="font-size: 1.8em;"><i class="icon nature-leaf32"></i> {{Vin}} 
 				<a href="#" class="ui-btn ui-btn-inline clr-primary wineAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
 				<a href="#" class="ui-btn ui-btn-inline clr-warning wineAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
 			</legend>
@@ -62,11 +59,10 @@
 		</div>
 		<div class="col-xs-12 col-sm-4 cellar" style="display:none;">
 			<input type="text" class="cellarAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
-			<legend style="font-size: 1.8em;">{{Cave}}
+			<legend style="font-size: 1.8em;"><i class="icon nourriture-wine23"></i> {{Cave}}
 				<a href="#" class="ui-btn ui-btn-inline clr-primary cellarAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
 				<a href="#" class="ui-btn ui-btn-inline clr-warning cellarAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
 			</legend>
-			
 			<label>{{Année}}</label>
 			<input type="number" class="cellarAttr" data-l1key="year" data-clear-btn="true" data-clear-btn="true" />
 			<label>{{A consommer}}</label>
@@ -90,7 +86,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-4 history" style="display:none;">
 			<input type="text" class="historyAttr" data-l1key="id" style="display:none;" data-clear-btn="true" />
-			<legend style="font-size: 1.8em;">{{Historique}}
+			<legend style="font-size: 1.8em;"><i class="fa fa-file"></i> {{Historique}}
 				<a href="#" class="ui-btn ui-btn-inline clr-primary historyAction pull-right" data-action="save"><i class="fa fa-check-circle"></i></a>
 				<a href="#" class="ui-btn ui-btn-inline clr-warning historyAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i></a>
 			</legend>

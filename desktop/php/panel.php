@@ -9,7 +9,7 @@ if (!isConnect()) {
 	    <a class="btn btn-default btn-sm" id="bt_consume"><i class="fa fa-calendar"></i> {{A consommer}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
-				<li class="nav-header">{{Region}}</li>
+				<li class="nav-header"><i class="icon nature-planet5"></i> {{Region}}</li>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<li class="cursor li_region active" data-region="all"><a>{{Toutes}}</a></li>
 				<?php
@@ -21,7 +21,7 @@ foreach (wcellar_wine::listRegion() as $region) {
 		</div>
 		<div class="bs-sidebar">
 			<ul id="ul_wine" class="nav nav-list bs-sidenav">
-				<li class="nav-header">{{Vins}}</li>
+				<li class="nav-header"><i class="icon nature-leaf32"></i> {{Vins}}</li>
 				<a class="btn btn-default wineAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 				<?php
@@ -42,7 +42,7 @@ foreach ($wines as $wine) {
 		<a class="btn btn-default btn-sm" id="bt_search"><i class="fa fa-search"></i> {{OK}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_cellar" class="nav nav-list bs-sidenav">
-				<li class="nav-header">{{Ma cave}}</li>
+				<li class="nav-header"><i class="icon nourriture-wine23"></i> {{Ma cave}}</li>
 				<a class="btn btn-default cellarAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 
@@ -50,7 +50,7 @@ foreach ($wines as $wine) {
 		</div>
 		<div class="bs-sidebar">
 			<ul id="ul_history" class="nav nav-list bs-sidenav">
-				<li class="nav-header">{{Historique}}</li>
+				<li class="nav-header"><i class="fa fa-file"></i> {{Historique}}</li>
 				<a class="btn btn-default historyAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
 			</ul>
@@ -61,7 +61,7 @@ foreach ($wines as $wine) {
 		<div class="wine" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
-					<legend>{{Vin}}
+					<legend><i class="icon nature-leaf32"></i> {{Vin}}
 					<a class="btn btn-success btn-xs wineAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
 						<a class="btn btn-danger btn-xs wineAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 					</legend>
@@ -133,7 +133,7 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 		<div class="cellar" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
-					<legend>{{Cave}}
+					<legend><i class="icon nourriture-wine23"></i> {{Cave}}
 					<a class="btn btn-success btn-xs cellarAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
 						<a class="btn btn-danger btn-xs cellarAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 					</legend>
@@ -208,7 +208,7 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 		<div class="history" style="display:none;">
 			<form class="form-horizontal">
 				<fieldset>
-					<legend>{{Historique}}
+					<legend><i class="fa fa-file"></i> {{Historique}}
 						<a class="btn btn-success btn-xs historyAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
 						<a class="btn btn-danger btn-xs historyAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 					</legend>
