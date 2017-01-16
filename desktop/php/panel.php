@@ -31,7 +31,7 @@ if (init('search') != '') {
 	$wines = wcellar_wine::all();
 }
 foreach ($wines as $wine) {
-	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . trim($wine->getName() . ' ' . $wine->getProducer()) . ' (' . $wine->getNumberOfBottle() . ')</a></li>';
+	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . trim($wine->getName() . ' - ' . $wine->getProducer() . ' ' . $wine->getRegion() . ' - ' . $wine->getColor()) . ' (' . $wine->getNumberOfBottle() . ')</a></li>';
 }
 ?>
 			</ul>

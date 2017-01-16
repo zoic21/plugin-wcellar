@@ -212,7 +212,7 @@ function load_wine(_search){
     $('#ul_wine .li_wine').remove();
     var ul = '';
     for(var i in data){
-        ul += '<li class="li_wine" data-wine_id="'+data[i].id+'"><a>'+$.trim(data[i].name+' '+data[i].producer)+' ('+data[i].numberOfBottle+')</a></li>';
+        ul += '<li class="li_wine" data-wine_id="'+data[i].id+'"><a>'+$.trim(data[i].name+' '+data[i].producer+' - '+data[i].region+' - '+data[i].color)+' ('+data[i].numberOfBottle+')</a></li>';
     }
     $('#ul_wine').append(ul);
     $('#ul_wine').listview('refresh')
