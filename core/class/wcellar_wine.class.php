@@ -95,7 +95,9 @@ class wcellar_wine {
 	}
 
 	public function preRemove() {
-		wcellar_cellar::removeByWine($this->getId());
+		foreach (wcellar_cellar::byWineId($this->getId()) as $cellar) {
+			$cellar->remove();
+		}
 	}
 
 	public function remove() {

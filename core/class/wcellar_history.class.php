@@ -54,15 +54,6 @@ class wcellar_history {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
-	public static function removeByCellarId($_cellar_id) {
-		$values = array(
-			'cellar_id' => $_cellar_id,
-		);
-		$sql = 'DELETE FROM wcellar_history
-		WHERE cellar_id=:cellar_id';
-		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
-	}
-
 	public static function statistics($_on = 'number', $_filter = array()) {
 		$values = array();
 		$sql = 'SELECT ';

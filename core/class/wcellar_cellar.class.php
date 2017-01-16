@@ -60,15 +60,6 @@ class wcellar_cellar {
 		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ALL, PDO::FETCH_CLASS, __CLASS__);
 	}
 
-	public static function removeByWine($_wine_id) {
-		$values = array(
-			'wine_id' => $_wine_id,
-		);
-		$sql = 'DELETE FROM wcellar_cellar
-		WHERE wine_id=:wine_id';
-		return DB::Prepare($sql, $values, DB::FETCH_TYPE_ROW);
-	}
-
 	public static function listYear() {
 		$sql = 'SELECT distinct(year)
 		FROM wcellar_cellar';
@@ -152,7 +143,9 @@ class wcellar_cellar {
 	}
 
 	public function preRemove() {
-		wcellar_history::removeByCellar($this->getId());
+		foreach (wcellar_history::byCellarId($this->getId()) as $history) {
+			$history->remove();
+		}
 	}
 
 	public function remove() {
