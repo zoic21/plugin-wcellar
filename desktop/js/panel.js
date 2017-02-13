@@ -26,14 +26,21 @@
 
 
  $('#bt_search').on('click',function(){
- 	window.location.href='index.php?v=d&m=wcellar&p=panel&search='+encodeURI($('#in_search').value());
+ 	load_wine($('#in_search').value())
  });
 
  $("#in_search").on('keypress', function (e) {
  	if (e.which == '13') {
- 		window.location.href='index.php?v=d&m=wcellar&p=panel&search='+encodeURI($('#in_search').value());
+ 		load_wine($('#in_search').value())
  	}
  })
+
+ $('#bt_clearSearch').on('click',function(){
+ 	$('#in_search').value('');
+ 	load_wine($('#in_search').value())
+ });
+
+ load_wine();
 
  /*********************************WINE**********************************************/
 
@@ -53,6 +60,7 @@
  		},
  		success: function (data) {
  			$('#div_alert').showAlert({message: '{{Sauvegarde réussie}}', level: 'success'});
+ 			load_wine($('#in_search').value())
  		}
  	})
  });
@@ -75,6 +83,7 @@
  					$('#ul_cellar .li_cellar').remove();
  					$('#ul_history .li_history').remove();
  					$('#div_alert').showAlert({message: '{{Suppression réussie}}', level: 'success'});
+ 					load_wine($('#in_search').value())
  				}
  			});
  		}
@@ -97,6 +106,23 @@
  		$('.li_wine[data-region="'+$(this).attr('data-region')+'"]').show();
  	}
  });
+
+ function load_wine(_search){
+ 	jeedom.wcellar.wine.all({
+ 		search : init(_search),
+ 		error: function (error) {
+ 			$('#div_alert').showAlert({message: error.message, level: 'danger'});
+ 		},
+ 		success: function (data) {
+ 			$('#ul_wine .li_wine').remove();
+ 			var ul = '';
+ 			for(var i in data){
+ 				ul += '<li class="li_wine" data-wine_id="'+data[i].id+'" data-region="' +data[i].region+ '"><a style="font-size:0.9em;">'+data[i].humanName+'</a></li>';
+ 			}
+ 			$('#ul_wine').append(ul);
+ 		}
+ 	});
+ }
 
 
  function wine_load(_id){

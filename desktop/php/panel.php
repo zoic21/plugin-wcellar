@@ -11,8 +11,8 @@ if (!isConnect()) {
 </style>
 <div class="row row-overflow">
 	<div class="col-lg-3 col-md-4 col-sm-4" style="margin-top : 4px;">
-	    <a class="btn btn-default btn-sm" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
-	    <a class="btn btn-default btn-sm" id="bt_consume"><i class="fa fa-calendar"></i> {{A consommer}}</a>
+		<a class="btn btn-default btn-sm" id="bt_statistics"><i class="fa fa-bar-chart"></i> {{Statistiques}}</a>
+		<a class="btn btn-default btn-sm" id="bt_consume"><i class="fa fa-calendar"></i> {{A consommer}}</a>
 		<div class="bs-sidebar" style="margin-top : 4px;">
 			<ul id="ul_region" class="nav nav-list bs-sidenav">
 				<li class="nav-header"><i class="icon nature-planet5"></i> {{Region}}</li>
@@ -30,28 +30,24 @@ foreach (wcellar_wine::listRegion() as $region) {
 				<li class="nav-header"><i class="icon nature-leaf32"></i> {{Vins}}</li>
 				<a class="btn btn-default wineAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
-				<?php
-if (init('search') != '') {
-	$wines = wcellar_wine::search(init('search'));
-} else {
-	$wines = wcellar_wine::all();
-}
-foreach ($wines as $wine) {
-	echo '<li class="cursor li_wine"  data-wine_id="' . $wine->getId() . '" data-region="' . $wine->getRegion() . '"><a>' . $wine->getHumanName() . '</a></li>';
-}
-?>
 			</ul>
 		</div>
 	</div>
 	<div class="col-lg-2 col-md-3 col-sm-4" style="margin-top : 4px;">
-		<input class="form-control input-sm" id="in_search" style="display: inline-block; width:calc(100% - 57px)" value="<?php echo init('search') ?>" />
-		<a class="btn btn-default btn-sm" id="bt_search"><i class="fa fa-search"></i> {{OK}}</a>
-		<div class="bs-sidebar" style="margin-top : 4px;">
+		<div class="form-group">
+			<div class="input-group">
+				<span class="input-group-btn">
+					<input class="form-control input-sm" id="in_search" style="display: inline-block; width:calc(100% - 80px)" value="<?php echo init('search') ?>" />
+					<a class="btn btn-default btn-sm" id="bt_clearSearch"><i class="fa fa-times"></i></a>
+					<a class="btn btn-default btn-sm" id="bt_search"><i class="fa fa-search"></i> {{OK}}</a>
+				</span>
+			</div>
+		</div>
+		<div class="bs-sidebar" style="margin-top : -10px;">
 			<ul id="ul_cellar" class="nav nav-list bs-sidenav">
 				<li class="nav-header"><i class="icon nourriture-wine23"></i> {{Ma cave}}</li>
 				<a class="btn btn-default cellarAction" style="width : 100%;margin-top : 5px;margin-bottom: 5px;" data-action="add"><i class="fa fa-plus-circle"></i> {{Ajouter}}</a>
 				<li class="filter" style="margin-bottom: 5px;"><input class="filter form-control input-sm" placeholder="{{Rechercher}}" style="width: 100%"/></li>
-
 			</ul>
 		</div>
 		<div class="bs-sidebar">
@@ -68,7 +64,7 @@ foreach ($wines as $wine) {
 			<form class="form-horizontal">
 				<fieldset>
 					<legend><i class="icon nature-leaf32"></i> {{Vin}}
-					<a class="btn btn-success btn-xs wineAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+						<a class="btn btn-success btn-xs wineAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
 						<a class="btn btn-danger btn-xs wineAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 					</legend>
 					<div class="row">
@@ -96,7 +92,7 @@ foreach ($wines as $wine) {
 								<label class="col-sm-4 control-label">{{Couleur}}</label>
 								<div class="col-sm-8">
 									<select class="wineAttr form-control" data-l1key="color">
-									<?php
+										<?php
 foreach (wcellar_wine::$_colors as $key => $value) {
 	echo '<option value="' . $key . '">' . $value . '</option>';
 }
@@ -140,7 +136,7 @@ foreach (wcellar_wine::$_colors as $key => $value) {
 			<form class="form-horizontal">
 				<fieldset>
 					<legend><i class="icon nourriture-wine23"></i> {{Cave}}
-					<a class="btn btn-success btn-xs cellarAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
+						<a class="btn btn-success btn-xs cellarAction pull-right" data-action="save"><i class="fa fa-check-circle"></i> {{Sauvegarder}}</a>
 						<a class="btn btn-danger btn-xs cellarAction pull-right" data-action="remove"><i class="fa fa-minus-circle"></i> {{Supprimer}}</a>
 					</legend>
 					<div class="row">
