@@ -90,7 +90,7 @@
  	});
  });
 
- $('.li_wine').on('click',function(){
+ $('#ul_wine').on('click','.li_wine',function(){
  	$('.li_wine').removeClass('active');
  	$(this).addClass('active');
  	wine_load($(this).attr('data-wine_id'));
@@ -117,7 +117,7 @@
  			$('#ul_wine .li_wine').remove();
  			var ul = '';
  			for(var i in data){
- 				ul += '<li class="li_wine" data-wine_id="'+data[i].id+'" data-region="' +data[i].region+ '"><a style="font-size:0.9em;">'+data[i].humanName+'</a></li>';
+ 				ul += '<li class="li_wine cursor" data-wine_id="'+data[i].id+'" data-region="' +data[i].region+ '"><a style="font-size:0.9em;">'+data[i].humanName+'</a></li>';
  			}
  			$('#ul_wine').append(ul);
  		}
