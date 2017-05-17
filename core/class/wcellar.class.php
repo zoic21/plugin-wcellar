@@ -18,6 +18,9 @@
 
 /* * ***************************Includes********************************* */
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
+include_file('core', 'wcellar_wine', 'class', 'wcellar');
+include_file('core', 'wcellar_cellar', 'class', 'wcellar');
+include_file('core', 'wcellar_history', 'class', 'wcellar');
 
 class wcellar extends eqLogic {
 	/*     * *************************Attributs****************************** */
